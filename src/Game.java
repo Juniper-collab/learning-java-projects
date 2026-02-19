@@ -12,6 +12,9 @@ public class Game {
     }
 
     public void start() {
+
+        int attempts = 0;
+
         System.out.println("Willkommen zum Zahlenratespiel! Kannst du das Spiel gewinnen?");
         System.out.println("Rate eine Zahl zwischen 1 und 100.");
 
@@ -19,6 +22,9 @@ public class Game {
         int guess = 0;
 
         while (guess != secretNumber){
+
+            attempts++;
+
             System.out.println("An welche Zahl denkst du?: ");
             guess = scanner.nextInt();
 
@@ -28,6 +34,7 @@ public class Game {
                 System.out.println("Zu groß!");
             } else {
                 System.out.println("Richtig! Omedeto!");
+                System.out.println("Du hast " + attempts + " Versuche gebraucht.");
             }
         }
     }
