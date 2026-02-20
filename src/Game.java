@@ -45,7 +45,18 @@ public class Game {
             attempts++;
 
             System.out.println("An welche Zahl denkst du?: ");
+
+            while (!scanner.hasNextInt()){
+                System.out.print("Bitte eine Zahl eingeben: ");
+                scanner.next();
+            }
             guess = scanner.nextInt();
+
+            if (guess>max){
+                System.out.print("Bitte eine Zahl eingeben: ");
+            } else if (guess==0){
+                System.out.print("Null gilt nicht! :P");
+            }
 
             if (guess < secretNumber){
                 System.out.println("Zu klein!");
