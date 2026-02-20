@@ -53,18 +53,16 @@ public class Game {
             guess = scanner.nextInt();
 
             if (guess>max){
-                System.out.print("Bitte eine Zahl eingeben: ");
+                System.out.print("Bitte eine Zahl zwischen 1 und "+max+" wählen! ");
             } else if (guess==0){
-                System.out.print("Null gilt nicht! :P");
-            }
-
-            if (guess < secretNumber){
-                System.out.println("Zu klein!");
+                System.out.print("Null gilt nicht! :P ");
+            } else if (guess < secretNumber){
+                System.out.println("Zu klein! ");
             } else if (guess > secretNumber){
-                System.out.println("Zu groß!");
+                System.out.println("Zu groß! ");
             } else {
-                System.out.println("Richtig! Omedeto!");
-                System.out.println("Du hast " + attempts + " Versuche gebraucht.");
+                System.out.println("Richtig! Omedeto! ");
+                System.out.println("Du hast " + attempts + " Versuche gebraucht. ");
             }
         }
     }
