@@ -16,7 +16,26 @@ public class Game {
         int attempts = 0;
 
         System.out.println("Willkommen zum Zahlenratespiel! Kannst du das Spiel gewinnen?");
-        System.out.println("Rate eine Zahl zwischen 1 und 100.");
+        System.out.println("Wähle einen Schwierigkeitsgrad:");
+        System.out.println("1 = leicht (1-50)");
+        System.out.println("2 = mittel (1-100)");
+        System.out.println("3 = schwer (1-500)");
+        System.out.println("Deine Wahl: ");
+
+        int choice = scanner.nextInt();
+
+        int max;
+        if (choice == 1){
+            max = 50;
+        } else if (choice == 3){
+            max = 500;
+        } else {
+            max = 100;
+        }
+
+        secretNumber = new Random().nextInt(max) +1;
+
+        System.out.println("Rate eine Zahl zwischen 1 und "+max+".");
 
 
         int guess = 0;
