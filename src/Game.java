@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,57 +14,74 @@ public class Game {
 
     public void start() {
 
-        int attempts = 0;
 
         System.out.println("Willkommen zum Zahlenratespiel! Kannst du das Spiel gewinnen?");
-        System.out.println("Wähle einen Schwierigkeitsgrad:");
-        System.out.println("1 = leicht (1-50)");
-        System.out.println("2 = mittel (1-100)");
-        System.out.println("3 = schwer (1-500)");
-        System.out.println("Deine Wahl: ");
 
-        int choice = scanner.nextInt();
+        boolean playAgain = false;
+        do {
 
-        int max;
-        if (choice == 1){
-            max = 50;
-        } else if (choice == 3){
-            max = 500;
-        } else {
-            max = 100;
-        }
+            int attempts = 0;
 
-        secretNumber = new Random().nextInt(max) +1;
+            System.out.println("Wähle einen Schwierigkeitsgrad:");
+            System.out.println("1 = leicht (1-50)");
+            System.out.println("2 = mittel (1-100)");
+            System.out.println("3 = schwer (1-500)");
+            System.out.println("Deine Wahl: ");
 
-        System.out.println("Rate eine Zahl zwischen 1 und "+max+".");
+            int choice = scanner.nextInt();
 
-
-        int guess = 0;
-
-        while (guess != secretNumber){
-
-            attempts++;
-
-            System.out.println("An welche Zahl denkst du?: ");
-
-            while (!scanner.hasNextInt()){
-                System.out.print("Bitte eine Zahl eingeben: ");
-                scanner.next();
-            }
-            guess = scanner.nextInt();
-
-            if (guess>max){
-                System.out.print("Bitte eine Zahl zwischen 1 und "+max+" wählen! ");
-            } else if (guess==0){
-                System.out.print("Null gilt nicht! :P ");
-            } else if (guess < secretNumber){
-                System.out.println("Zu klein! ");
-            } else if (guess > secretNumber){
-                System.out.println("Zu groß! ");
+            int max;
+            if (choice == 1) {
+                max = 50;
+            } else if (choice == 3) {
+                max = 500;
             } else {
-                System.out.println("Richtig! Omedeto! ");
-                System.out.println("Du hast " + attempts + " Versuche gebraucht. ");
+                max = 100;
             }
-        }
+
+            secretNumber = new Random().nextInt(max) + 1;
+
+            System.out.println("Rate eine Zahl zwischen 1 und " + max + ".");
+
+
+            int guess = 0;
+
+            while (guess != secretNumber) {
+
+                attempts++;
+
+                System.out.println("An welche Zahl denkst du?: ");
+
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Bitte eine Zahl eingeben: ");
+                    scanner.next();
+                }
+                guess = scanner.nextInt();
+
+                if (guess > max || guess < 0) {
+                    System.out.print("Bitte eine Zahl zwischen 1 und " + max + " wählen! ");
+                } else if (guess == 0) {
+                    System.out.print("Null gilt nicht! :P ");
+                } else if (guess < secretNumber) {
+                    System.out.println("Zu klein! ");
+                } else if (guess > secretNumber) {
+                    System.out.println("Zu groß! ");
+                } else {
+                    System.out.println("Richtig! Omedeto! ");
+                    System.out.println("Du hast " + attempts + " Versuche gebraucht. ");
+
+                    playAgain = askToPlayAgain();
+                }
+            }
+        }while (playAgain);
+
+            System.out.println("Danke fürs Spielen! ");
+
+    }
+
+    private boolean askToPlayAgain(){
+        System.out.print("Nochmal spielen? (j/n): ");
+        String input = scanner.next().trim().toLowerCase();
+        return input.equals("j") || input.equals("ja") || input.equals("y") || input.equals("yes");
     }
 }
