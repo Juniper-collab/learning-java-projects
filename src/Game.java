@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
@@ -31,12 +32,26 @@ public class Game {
             int choice = scanner.nextInt();
 
             int max;
+
+            String difficultyKey;
+
             if (choice == 1) {
                 max = 50;
+                difficultyKey = "easy";
             } else if (choice == 3) {
                 max = 500;
+                difficultyKey = "hard";
             } else {
                 max = 100;
+                difficultyKey = "medium";
+            }
+
+            List<Integer> highscores = highscoreManager.getHighscores(difficultyKey);
+
+            if (highscores.isEmpty()) {
+                System.out.println("Noch keine Highsores vorhanden.");
+            } else {
+                System.out.println("Top 5 Highscores in der Kategorie "+difficultyKey+": "+ highscores);
             }
 
             secretNumber = new Random().nextInt(max) + 1;
@@ -69,6 +84,7 @@ public class Game {
                 } else {
                     System.out.println("Richtig! Omedeto! ");
                     System.out.println("Du hast " + attempts + " Versuche gebraucht. ");
+                    highscoreManager.updateHighscores(difficultyKey, attempts);
 
                     playAgain = askToPlayAgain();
                 }
@@ -84,4 +100,6 @@ public class Game {
         String input = scanner.next().trim().toLowerCase();
         return input.equals("j") || input.equals("ja") || input.equals("y") || input.equals("yes");
     }
+
+    private HighscoreManager highscoreManager = new HighscoreManager();
 }
