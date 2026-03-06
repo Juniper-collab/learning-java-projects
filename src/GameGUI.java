@@ -53,6 +53,15 @@ public class GameGUI {
 
             frame.setContentPane(mainPanel);
 
+            String playerName = JOptionPane.showInputDialog(frame, "Wie ist dein Name?", "Spielername", JOptionPane.QUESTION_MESSAGE);
+            if (playerName == null || playerName.trim().isEmpty()){
+                playerName = "Spieler";
+            } else {
+                playerName = playerName.trim();
+            }
+
+            outputArea.append("Hi " + playerName + "!\n");
+
             // Game state
             Random random = new Random();
             final int[] secretNumber = { random.nextInt(100) + 1 };
